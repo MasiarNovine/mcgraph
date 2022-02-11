@@ -101,9 +101,9 @@ degree(G)
 degree(G,mode="out")
 degree(G,mode="in")
 par(mai=c(0.1,0.1,0.2,0.0),mfrow=c(2,2))
-plot(G,layout="mds",main="mds")
-plot(G,layout='circle',main="circle")
-plot(G,layout='sam',main="sam(mon)")
+plot(G,vertex.size=2,layout="mds",main="mds")
+plot(G,vertex.size=2,layout='circle',main="circle")
+plot(G,vertex.size=2,layout='sam',main="sam(mon)")
 p=recordPlot()
 ```
 
@@ -133,7 +133,7 @@ lay
 attr(G,'layout')=lay
 par(mfrow=c(2,2),mai=c(0.1,0.1,0.1,0.1))
 replayPlot(p)
-plot(G,main="custom")
+plot(G,vertex.size=2,main="custom")
 ```
 
 For more sophisticated plotting methods and other graph layouts you should use
@@ -167,13 +167,13 @@ specify two input nodes by their node names: 'A1' and 'G1', thereafer we let the
 
 ```{r label=angieplots,fig=TRUE, dev="pdf", fig.width=6, fig.height=6,fig.cap="Random undirected and directed graphs made using the angie algorithm and using the mcg.u2d function by choosing defined or random input nodes \\label{fig:angieplots}."}
 par(mfrow=c(2,2),mai=c(0.0,0.1,0.1,0.0))
-plot(ang,layout="sam")
+plot(ang,vertex.size=2,layout="sam")
 anu=mcg.u2d(ang,input=c("A1","G1"))
-plot(anu,layout="sam")
+plot(anu,vertex.size=2,layout="sam")
 anu=mcg.u2d(ang,input=3)
-plot(anu,layout="sam")
+plot(anu,vertex.size=2,layout="sam")
 anu=mcg.u2d(ang,input=4)
-plot(anu,layout="sam")
+plot(anu,vertex.size=2,layout="sam")
 ```
 
 As you can see, edges are starting from the input node and spread in the same
@@ -202,22 +202,22 @@ package. We start with some graphs having a defined graph structure.
 par(mfrow=c(3,2),mai=c(0.1,0.1,0.1,0.1))
 banu=mcg.band(nodes=12)
 band=mcg.u2d(banu,input=1)
-plot(band,layout="circle")
+plot(band,vertex.size=2,layout="circle")
 ciru=mcg.circular(nodes=12)
 cird=mcg.u2d(ciru,input=1)
-plot(cird,layout="circle")
+plot(cird,vertex.size=2,layout="circle")
 cross=mcg.cross(bands=5,length=4)
 crosd=mcg.u2d(cross,input=1)
-plot(crosd,layout="star")
+plot(crosd,vertex.size=2,layout="star")
 hubs=mcg.hubs(nodes=12,hubs=2)
 hubd=mcg.u2d(hubs,input=c("A1","H1"))
-plot(hubd,layout="circle")
+plot(hubd,vertex.size=2,layout="circle")
 latu=mcg.lattice(dim=5)
 latd=mcg.u2d(latu,input=1)
-plot(latd,layout="grid")
+plot(latd,vertex.size=2,layout="grid")
 latu=mcg.lattice(dim=6,centralize=2)
 latd=mcg.u2d(latu,input=3)
-plot(latd,layout="grid")
+plot(latd,vertex.size=2,layout="grid")
 ```
 
 There are as well a few random graph generation functions. Please note, that for the last graph, the cluster graph we have to ensure, that in every cluster is at least one inout node.
@@ -226,16 +226,16 @@ There are as well a few random graph generation functions. Please note, that for
 par(mfrow=c(2,2),mai=c(0.1,0.1,0.1,0.1))
 ang=mcg.angie(nodes=12,edges=18)
 and=mcg.u2d(ang,input=1)
-plot(and,layout="circle")
+plot(and,vertex.size=2,layout="circle")
 bar=mcg.barabasi(nodes=12,m=1)
 bad=mcg.u2d(bar,input=1)
-plot(bad,layout="circle")
+plot(bad,vertex.size=2,layout="circle")
 ran=mcg.random(nodes=12,edges=18)
 rad=mcg.u2d(ran,input=1)
-plot(rad,layout="circle")
+plot(rad,vertex.size=2,layout="circle")
 clu=mcg.cluster(nodes=15,cluster=3,edges=24)
 cld=mcg.u2d(clu,input=c("A1","F1","K1","M1"))
-plot(cld,layout="circle")
+plot(cld,vertex.size=2,layout="circle")
 ```
 
 ## Creating data for directed and undirected graphs
@@ -290,14 +290,14 @@ than -0.2. As this produces far too many edges in the graph we thereafter increa
 
 ```{r label=corrplot, fig=TRUE, dev="pdf", fig.width=8, fig.height=8,fig.cap="Network reconstruction using correlation thresholding"}
 par(mfrow=c(2,2),mai=rep(0.3,4))
-plot(G,main="Real Graph")
+plot(G,vertex.size=2,main="Real Graph")
 mcg.corrplot(cor(t(G.data)),text.lower=TRUE,pch.minus=18,main="corrplot")
 G2=mcg.ct(cor(t(G.data)),rs=0.09)
 attr(G2,"layout")=attr(G,"layout")
-plot(G2,main="Predicted Graph rs=0.09")
+plot(G2,vertex.size=2,main="Predicted Graph rs=0.09")
 G2=mcg.ct(cor(t(G.data)),rs=0.25)
 attr(G2,"layout")=attr(G,"layout")
-plot(G2,main="Predicted Graph rs=0.25")
+plot(G2,vertex.size=2,main="Predicted Graph rs=0.25")
 ```
 In this small graph the correlation thresholding method can reconstruct the
 original graph topology if a "good" threshold is choosen. The package provides a few more network reconstruction
@@ -397,13 +397,13 @@ G['E','F']=1
 G['G','A']=-1
 G
 g=mcg.new(G)
-plot(g,layout='sam',main="sam(mon) layout")
+plot(g,vertex.size=2,layout='sam',main="sam(mon) layout")
 
 lay=matrix(c(1,3, 1,1, 2,2, 3,2, 4,3, 4,1, 2.5,3),byrow=TRUE,ncol=2)
 colnames(lay)=c('x','y')
 rownames(lay)=LETTERS[1:7]
 lay
-plot(g,layout=lay,main="custom layout")
+plot(g,vertex.size=2,layout=lay,main="custom layout")
 ```
 
 ```{r label=correlations,result="asis",include=FALSE}
@@ -463,10 +463,10 @@ Let's apply those methods on a simple random graph where we now the structure:
 
 ```{r, dev="pdf", fig.cap="A plot made by the `mcg.angie` function with according correlation matrix of generated synthetic data."}
 par(mfrow=c(2,1), mai=rep(0.1,4))
-set.seed(12346)
+set.seed(123)
 ang=mcg.u2d(mcg.angie(nodes=10,edges=16),input=c("B1","F1"))
-lay=mcg.layout(ang,mode="frg", seed=123)
-plot(ang,layout=lay)
+lay=mcg.layout.frg(ang, iter=500, L=5, W=5, temp_prop=0.2, quench_prop=0.9, force_prop=1)
+plot(ang,vertex.size=2)
 ang
 data=mcg.graph2data(ang,n=100,iter=10,noise=0.5)
 mcg.corrplot(cor(t(data)),text.lower=TRUE,cex.coeff=0.8)
@@ -606,7 +606,7 @@ mean(mcg.timeit(expression(mcg.rpart(swiss, rs=0.1))))
 mean(mcg.timeit(expression(mcg.lvs(swiss, rs=0.1, output='mcgraph',code="R"))))
 options(warn=0)
 ```
-  
+
 
 ## Summary
 

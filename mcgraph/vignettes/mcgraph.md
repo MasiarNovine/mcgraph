@@ -6,7 +6,7 @@ csl: nature-biotechnology.csl
 shorttitle: "mcgraph intro"
 author:
 - Detlef Groth
-date: "14. Dezember 2021"
+date: "11. Februar 2022"
 abstract: >
     The package *mcgraph* can be used to create different types of directed
     and undirected graphs and data for those graphs where the correlations between
@@ -74,21 +74,6 @@ graph.
 
 ```r
 library(mcgraph)
-```
-
-```
-## Loading required package: MASS
-```
-
-```
-## Loading required package: rpart
-```
-
-```
-## Loading required package: Rcpp
-```
-
-```r
 G=matrix(0,nrow=8,ncol=8)
 rownames(G)=colnames(G)=LETTERS[1:8]
 G['A','C']=1
@@ -167,9 +152,9 @@ degree(G,mode="in")
 
 ```r
 par(mai=c(0.1,0.1,0.2,0.0),mfrow=c(2,2))
-plot(G,layout="mds",main="mds")
-plot(G,layout='circle',main="circle")
-plot(G,layout='sam',main="sam(mon)")
+plot(G,vertex.size=2,layout="mds",main="mds")
+plot(G,vertex.size=2,layout='circle',main="circle")
+plot(G,vertex.size=2,layout='sam',main="sam(mon)")
 p=recordPlot()
 ```
 
@@ -215,7 +200,7 @@ lay
 attr(G,'layout')=lay
 par(mfrow=c(2,2),mai=c(0.1,0.1,0.1,0.1))
 replayPlot(p)
-plot(G,main="custom")
+plot(G,vertex.size=2,main="custom")
 ```
 
 ![Plotting graph with different layouts.](figure/ownlayout-1.pdf)
@@ -253,13 +238,13 @@ specify two input nodes by their node names: 'A1' and 'G1', thereafer we let the
 
 ```r
 par(mfrow=c(2,2),mai=c(0.0,0.1,0.1,0.0))
-plot(ang,layout="sam")
+plot(ang,vertex.size=2,layout="sam")
 anu=mcg.u2d(ang,input=c("A1","G1"))
-plot(anu,layout="sam")
+plot(anu,vertex.size=2,layout="sam")
 anu=mcg.u2d(ang,input=3)
-plot(anu,layout="sam")
+plot(anu,vertex.size=2,layout="sam")
 anu=mcg.u2d(ang,input=4)
-plot(anu,layout="sam")
+plot(anu,vertex.size=2,layout="sam")
 ```
 
 ![Random undirected and directed graphs made using the angie algorithm and using the mcg.u2d function by choosing defined or random input nodes \label{fig:angieplots}.](figure/angieplots-1.pdf)
@@ -303,22 +288,22 @@ package. We start with some graphs having a defined graph structure.
 par(mfrow=c(3,2),mai=c(0.1,0.1,0.1,0.1))
 banu=mcg.band(nodes=12)
 band=mcg.u2d(banu,input=1)
-plot(band,layout="circle")
+plot(band,vertex.size=2,layout="circle")
 ciru=mcg.circular(nodes=12)
 cird=mcg.u2d(ciru,input=1)
-plot(cird,layout="circle")
+plot(cird,vertex.size=2,layout="circle")
 cross=mcg.cross(bands=5,length=4)
 crosd=mcg.u2d(cross,input=1)
-plot(crosd,layout="star")
+plot(crosd,vertex.size=2,layout="star")
 hubs=mcg.hubs(nodes=12,hubs=2)
 hubd=mcg.u2d(hubs,input=c("A1","H1"))
-plot(hubd,layout="circle")
+plot(hubd,vertex.size=2,layout="circle")
 latu=mcg.lattice(dim=5)
 latd=mcg.u2d(latu,input=1)
-plot(latd,layout="grid")
+plot(latd,vertex.size=2,layout="grid")
 latu=mcg.lattice(dim=6,centralize=2)
 latd=mcg.u2d(latu,input=3)
-plot(latd,layout="grid")
+plot(latd,vertex.size=2,layout="grid")
 ```
 
 ![Regular graph topologies](figure/gtypes-1.pdf)
@@ -330,16 +315,16 @@ There are as well a few random graph generation functions. Please note, that for
 par(mfrow=c(2,2),mai=c(0.1,0.1,0.1,0.1))
 ang=mcg.angie(nodes=12,edges=18)
 and=mcg.u2d(ang,input=1)
-plot(and,layout="circle")
+plot(and,vertex.size=2,layout="circle")
 bar=mcg.barabasi(nodes=12,m=1)
 bad=mcg.u2d(bar,input=1)
-plot(bad,layout="circle")
+plot(bad,vertex.size=2,layout="circle")
 ran=mcg.random(nodes=12,edges=18)
 rad=mcg.u2d(ran,input=1)
-plot(rad,layout="circle")
+plot(rad,vertex.size=2,layout="circle")
 clu=mcg.cluster(nodes=15,cluster=3,edges=24)
 cld=mcg.u2d(clu,input=c("A1","F1","K1","M1"))
-plot(cld,layout="circle")
+plot(cld,vertex.size=2,layout="circle")
 ```
 
 ![Random graph topologies](figure/unnamed-chunk-5-1.pdf)
@@ -423,14 +408,14 @@ than -0.2. As this produces far too many edges in the graph we thereafter increa
 
 ```r
 par(mfrow=c(2,2),mai=rep(0.3,4))
-plot(G,main="Real Graph")
+plot(G,vertex.size=2,main="Real Graph")
 mcg.corrplot(cor(t(G.data)),text.lower=TRUE,pch.minus=18,main="corrplot")
 G2=mcg.ct(cor(t(G.data)),rs=0.09)
 attr(G2,"layout")=attr(G,"layout")
-plot(G2,main="Predicted Graph rs=0.09")
+plot(G2,vertex.size=2,main="Predicted Graph rs=0.09")
 G2=mcg.ct(cor(t(G.data)),rs=0.25)
 attr(G2,"layout")=attr(G,"layout")
-plot(G2,main="Predicted Graph rs=0.25")
+plot(G2,vertex.size=2,main="Predicted Graph rs=0.25")
 ```
 
 ![Network reconstruction using correlation thresholding](figure/corrplot-1.pdf)
@@ -556,7 +541,7 @@ G
 
 ```r
 g=mcg.new(G)
-plot(g,layout='sam',main="sam(mon) layout")
+plot(g,vertex.size=2,layout='sam',main="sam(mon) layout")
 
 lay=matrix(c(1,3, 1,1, 2,2, 3,2, 4,3, 4,1, 2.5,3),byrow=TRUE,ncol=2)
 colnames(lay)=c('x','y')
@@ -576,7 +561,7 @@ lay
 ```
 
 ```r
-plot(g,layout=lay,main="custom layout")
+plot(g,vertex.size=2,layout=lay,main="custom layout")
 ```
 
 ![Graph with negative correlations](figure/ngraph-1.pdf)
@@ -660,25 +645,25 @@ Let's apply those methods on a simple random graph where we now the structure:
 
 ```r
 par(mfrow=c(2,1), mai=rep(0.1,4))
-set.seed(12346)
+set.seed(123)
 ang=mcg.u2d(mcg.angie(nodes=10,edges=16),input=c("B1","F1"))
-lay=mcg.layout(ang,mode="frg", seed=123)
-plot(ang,layout=lay)
+lay=mcg.layout.frg(ang, iter=500, L=5, W=5, temp_prop=0.2, quench_prop=0.9, force_prop=1)
+plot(ang,vertex.size=2)
 ang
 ```
 
 ```
 ##    A1 B1 C1 D1 E1 F1 G1 H1 I1 J1
-## A1  0  0  0  1  0  0  0  0  1  0
-## B1  1  0  1  0  0  0  1  0  0  0
-## C1  0  0  0  1  0  0  0  0  0  0
-## D1  0  0  0  0  1  0  0  1  1  0
-## E1  0  0  0  0  0  0  0  1  0  0
-## F1  0  0  0  1  0  0  0  0  0  0
-## G1  0  0  0  0  1  0  0  1  1  1
-## H1  0  0  0  0  0  0  0  0  0  0
-## I1  0  0  0  0  0  0  0  0  0  1
-## J1  0  0  0  0  0  0  0  0  0  0
+## A1  0  0  1  0  0  0  1  0  0  0
+## B1  1  0  0  0  0  0  1  1  0  0
+## C1  0  0  0  1  1  0  0  0  1  0
+## D1  0  0  0  0  0  0  0  0  0  0
+## E1  0  0  0  0  0  0  0  0  0  0
+## F1  0  0  1  1  0  0  0  0  1  0
+## G1  0  0  0  0  0  0  0  0  0  1
+## H1  0  0  1  0  0  0  0  0  0  0
+## I1  0  0  0  0  1  0  0  0  0  1
+## J1  0  0  0  0  1  0  0  0  0  0
 ## attr(,"class")
 ## [1] "mcgraph"
 ## attr(,"type")
@@ -702,11 +687,11 @@ data[1:4,1:4]
 ```
 
 ```
-##        [,1]     [,2]      [,3]     [,4]
-## A1 100.8565 99.90374  99.63477 103.5102
-## B1 100.8384 99.19473 101.89638 103.6470
-## C1 102.6602 99.62100  99.63178 100.4033
-## D1 100.1454 99.76125  96.36313 101.5881
+##        [,1]      [,2]      [,3]      [,4]
+## A1 99.33438 100.39718  99.16835 101.61455
+## B1 96.45830 104.04331  97.20464 102.13980
+## C1 98.09574 100.27255 102.76981 100.79914
+## D1 99.54372  99.82362  99.94274  99.90882
 ```
 
 ```r
@@ -716,16 +701,16 @@ as.matrix(ang.rpart)
 
 ```
 ##    A1 B1 C1 D1 E1 F1 G1 H1 I1 J1
-## A1  0  1  0  0  0  0  0  0  1  0
-## B1  1  0  0  0  0 -1  1  1  0  0
-## C1  0  0  0  1  0  0  1  0  0  0
-## D1  0  0  1  0  0  1  0  0  1  0
-## E1  0  0  0  0  0  0  0  1  1  1
-## F1  0 -1  0  1  0  0  0  0  1  0
-## G1  0  1  1  0  0  0  0  1  0  1
-## H1  0  1  0  0  1  0  1  0  0  0
-## I1  1  0  0  1  1  1  0  0  0  0
-## J1  0  0  0  0  1  0  1  0  0  0
+## A1  0  1  0  0  0  0  1  0  0  0
+## B1  1  0  0  0 -1  0  0  1  0  0
+## C1  0  0  0  0  0  1  0  1  1  0
+## D1  0  0  0  0  0  1  0  0  0  0
+## E1  0 -1  0  0  0  0  0  0  1  1
+## F1  0  0  1  1  0  0  0  0  1  0
+## G1  1  0  0  0  0  0  0  0  0  0
+## H1  0  1  1  0  0  0  0  0  0  0
+## I1  0  0  1  0  1  1  0  0  0  0
+## J1  0  0  0  0  1  0  0  0  0  0
 ```
 Let's calculate the number of correctly predicted edges (TP) and the number of
 wrongly predicted edges (FP):
@@ -746,9 +731,9 @@ round(unlist(mcg.accuracy(ang,mcg.rpart(t(data),rs=0.04))),3)
 
 ```
 ##       TP       FP       TN       FN     Sens     Spec      BCR       F1 
-##    9.000    6.000   23.000    7.000    0.562    0.793    0.678    0.581 
+##   10.000    1.000   28.000    6.000    0.625    0.966    0.795    0.741 
 ##      MCC norm_MCC 
-##    0.361    0.681
+##    0.658    0.829
 ```
 
 ```r
@@ -757,9 +742,9 @@ round(unlist(mcg.accuracy(ang,mcg.glmnet(t(data),rs=0.04))),3)
 
 ```
 ##       TP       FP       TN       FN     Sens     Spec      BCR       F1 
-##   12.000    2.000   27.000    4.000    0.750    0.931    0.841    0.800 
+##   13.000    0.000   29.000    3.000    0.812    1.000    0.906    0.897 
 ##      MCC norm_MCC 
-##    0.704    0.852
+##    0.858    0.929
 ```
 
 ```r
@@ -768,9 +753,9 @@ round(unlist(mcg.accuracy(ang,mcg.lvs(t(data),rs=0.04))),3)
 
 ```
 ##       TP       FP       TN       FN     Sens     Spec      BCR       F1 
-##   11.000    3.000   26.000    5.000    0.688    0.897    0.792    0.733 
+##   13.000    0.000   29.000    3.000    0.812    1.000    0.906    0.897 
 ##      MCC norm_MCC 
-##    0.604    0.802
+##    0.858    0.929
 ```
 
 ```r
@@ -779,9 +764,9 @@ round(unlist(mcg.accuracy(ang,mcg.ct(t(data),rs=0.04))),3)
 
 ```
 ##       TP       FP       TN       FN     Sens     Spec      BCR       F1 
-##   14.000    7.000   22.000    2.000    0.875    0.759    0.817    0.757 
+##   16.000    4.000   25.000    0.000    1.000    0.862    0.931    0.889 
 ##      MCC norm_MCC 
-##    0.608    0.804
+##    0.830    0.915
 ```
 
 As the mcgraph object created from these graph generators returns have as well
@@ -796,16 +781,16 @@ round(attr(ang.rpart,"r.squared"),3)
 
 ```
 ##       A1    B1    C1    D1    E1    F1    G1    H1    I1    J1
-## A1 0.000 0.112 0.000 0.000 0.000 0.000 0.000 0.000 0.294 0.000
-## B1 0.076 0.000 0.000 0.000 0.000 0.070 0.332 0.064 0.000 0.000
-## C1 0.000 0.014 0.000 0.145 0.034 0.000 0.341 0.000 0.000 0.000
-## D1 0.018 0.000 0.080 0.000 0.038 0.327 0.000 0.000 0.086 0.018
-## E1 0.000 0.010 0.064 0.029 0.000 0.000 0.018 0.205 0.172 0.000
-## F1 0.000 0.000 0.000 0.319 0.000 0.000 0.000 0.000 0.061 0.000
-## G1 0.015 0.348 0.004 0.000 0.000 0.000 0.000 0.148 0.000 0.028
-## H1 0.000 0.000 0.000 0.000 0.134 0.000 0.288 0.000 0.014 0.000
-## I1 0.126 0.000 0.039 0.327 0.000 0.000 0.026 0.000 0.000 0.000
-## J1 0.000 0.000 0.034 0.000 0.053 0.000 0.353 0.032 0.000 0.000
+## A1 0.000 0.357 0.015 0.014 0.000 0.023 0.100 0.025 0.008 0.012
+## B1 0.319 0.000 0.000 0.000 0.058 0.000 0.000 0.108 0.000 0.000
+## C1 0.000 0.000 0.000 0.000 0.000 0.373 0.000 0.000 0.000 0.000
+## D1 0.000 0.000 0.060 0.000 0.000 0.290 0.000 0.000 0.009 0.000
+## E1 0.000 0.027 0.000 0.002 0.000 0.040 0.000 0.069 0.423 0.019
+## F1 0.000 0.000 0.012 0.318 0.000 0.000 0.000 0.000 0.110 0.000
+## G1 0.452 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## H1 0.000 0.284 0.114 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+## I1 0.000 0.000 0.335 0.008 0.227 0.134 0.000 0.000 0.000 0.000
+## J1 0.000 0.004 0.039 0.050 0.324 0.000 0.086 0.000 0.014 0.000
 ```
 
 By starting from a r-square threshold from 0.001 to 0.01, 0.04,0.09,
@@ -828,7 +813,7 @@ tab
 ```
 ## y
 ##  0  1 
-## 33 67
+## 38 62
 ```
 
 ```r
@@ -840,12 +825,12 @@ head(data.frame(probs=probs,y=y))
 
 ```
 ##       probs y
-## 1 0.7065179 0
-## 2 0.5798900 1
-## 3 0.6477790 0
-## 4 0.6671542 0
-## 5 0.5459149 1
-## 6 0.5755096 0
+## 1 0.6921088 0
+## 2 0.6243161 1
+## 3 0.7469625 1
+## 4 0.6002350 1
+## 5 0.7021062 1
+## 6 0.4951405 1
 ```
 
 ```r
@@ -853,8 +838,8 @@ head(probs[y == 1L])
 ```
 
 ```
-##         2         5         8         9        12        13 
-## 0.5798900 0.5459149 0.6140187 0.6197740 0.7304849 0.6025044
+##         2         3         4         5         6         7 
+## 0.6243161 0.7469625 0.6002350 0.7021062 0.4951405 0.8386036
 ```
 
 ```r
@@ -862,8 +847,8 @@ head(probs[y == 0L])
 ```
 
 ```
-##         1         3         4         6         7        10 
-## 0.7065179 0.6477790 0.6671542 0.5755096 0.6968906 0.6336188
+##         1        12        18        21        23        24 
+## 0.6921088 0.4924694 0.4897111 0.4956111 0.4878594 0.8511402
 ```
 
 ```r
@@ -874,12 +859,12 @@ head(combinations)
 
 ```
 ##   positiveProbs negativeProbs
-## 1     0.5798900     0.7065179
-## 2     0.5459149     0.7065179
-## 3     0.6140187     0.7065179
-## 4     0.6197740     0.7065179
-## 5     0.7304849     0.7065179
-## 6     0.6025044     0.7065179
+## 1     0.6243161     0.6921088
+## 2     0.7469625     0.6921088
+## 3     0.6002350     0.6921088
+## 4     0.7021062     0.6921088
+## 5     0.4951405     0.6921088
+## 6     0.8386036     0.6921088
 ```
 
 ```r
@@ -887,7 +872,7 @@ mean(combinations$positiveProbs > combinations$negativeProbs)
 ```
 
 ```
-## [1] 0.584351
+## [1] 0.7033107
 ```
 
 ```r
@@ -895,7 +880,7 @@ dim(combinations)
 ```
 
 ```
-## [1] 2211    2
+## [1] 2356    2
 ```
 
 ```r
@@ -904,7 +889,7 @@ tab[1]*tab[2]
 
 ```
 ##    0 
-## 2211
+## 2356
 ```
 
 ```r
@@ -913,12 +898,12 @@ tail(combinations)
 
 ```
 ##      positiveProbs negativeProbs
-## 2206     0.5862598     0.6950567
-## 2207     0.6614414     0.6950567
-## 2208     0.7927703     0.6950567
-## 2209     0.6542261     0.6950567
-## 2210     0.6651004     0.6950567
-## 2211     0.7112551     0.6950567
+## 2351     0.6217808      0.869726
+## 2352     0.7244383      0.869726
+## 2353     0.6885487      0.869726
+## 2354     0.6434771      0.869726
+## 2355     0.8478762      0.869726
+## 2356     0.5344840      0.869726
 ```
 
 ## Imputation of missing values
@@ -1080,7 +1065,7 @@ mcg.timeit(expression(mcg.lvs(swiss, rs=0.1, output='mcgraph')))
 ```
 
 ```
-## [1] 0.0014448166 0.0006530285 0.0004026890 0.0002567768 0.0002584457
+## [1] 0.0006167889 0.0002710819 0.0003113747 0.0004642010 0.0005104542
 ```
 
 ```r
@@ -1088,7 +1073,7 @@ mean(mcg.timeit(expression(mcg.lvs(swiss, rs=0.1, output='mcgraph'))))
 ```
 
 ```
-## [1] 0.0004004002
+## [1] 0.0005884647
 ```
 
 ```r
@@ -1096,7 +1081,7 @@ mean(mcg.timeit(expression(mcg.rpart(swiss, rs=0.1))))
 ```
 
 ```
-## [1] 0.08229141
+## [1] 0.04940643
 ```
 
 ```r
@@ -1104,13 +1089,13 @@ mean(mcg.timeit(expression(mcg.lvs(swiss, rs=0.1, output='mcgraph',code="R"))))
 ```
 
 ```
-## [1] 0.0636569
+## [1] 0.02985334
 ```
 
 ```r
 options(warn=0)
 ```
-  
+
 
 ## Summary
 
