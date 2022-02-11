@@ -1,0 +1,43 @@
+ChangeLog
+==========
+
+## Version 0.3 
+
+
+- 2019-11-19 started
+- adding wernerr and wernerc graph types
+- docu fixes for non documented arguments
+- adding changelog
+- new modus for creating random data, less loss of R values over different steps
+- fixes on corrplot
+- negative correlations
+- visualize negative correlations on directed graph
+
+## Version 0.4
+
+- 2020-10-30
+- fixing negative correlations now of same strength
+- standalone command line script graph2data.R which can be used as well 
+  independently from the package
+  
+
+## Version 0.4.3
+
+- 2020-12-22ff
+- weighted graph possible
+- interactive mode for plotting
+- mcg.components
+- mcg.shortest.paths
+- fix for mcg.cluster and mcg.angie for too many edges
+- coloring fix for isolated nodes
+- improved layout for sam and mds by introducing invisible edges between components
+ 
+
+## Version 0.5
+
+- 2021-04-08 moved to repo mcgraph
+- 2021-05-28 adding mcg.rpart
+- 2021-08-06 adding mcg.accuracy
+- 2021-08-08 fixing negative plot arrows
+- 2021-08-08 adding Cpp version of graph2data
+- 2021-10-30 adding mcg.timeit and mcg.impute method
