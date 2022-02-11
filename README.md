@@ -66,7 +66,7 @@ Close R and run on the terminal
 pandoc -i mcgraph.md --citeproc --bibliography bibliography.bib -o mcgraph.pdf
 ```
 
-You can the remove the subfolder `figure` and copy the vignette `mcgraph.pdf` into the folder `man/doc`.
+You can remove the subfolder `figure` and copy the vignette `mcgraph.pdf` into the folder `inst/doc/`.
 
 ## License
 
