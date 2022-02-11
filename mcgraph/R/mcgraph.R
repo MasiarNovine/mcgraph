@@ -619,9 +619,9 @@ mcg.accuracy <- function (g.true,g.pred) {
 # not in use: @param layout either a layout function or a matrix with x and y coordinates for each node
 
 plot.mcgraph <- function(x, layout=NULL, noise=FALSE,
-                        vertex.size=1, vertex.length=0.5, vertex.color="darkorange2", vertex.in.color="light blue",
+                        vertex.size=1, vertex.length=0.5, vertex.color="orange", vertex.in.color="light blue",
                         vertex.out.color="salmon", vertex.border.color="black", vertex.symbol="circle",
-                        edge.width=1.5, edge.color="grey50", edge.neg.color="red", edge.lty="solid",
+                        edge.width=1.5, edge.color="black", edge.neg.color="red", edge.lty="solid",
                         arr.length=0.08, arr.angle=12, arr.mode="aligned", show.labels=TRUE, label.size=1, label.font=NULL,
                         label.color=NULL, label.adj=NULL, label.pos=NULL, label.offset=0.5, label.text=NULL, label.vfont=NULL,
                         bw=FALSE, interactive=FALSE, ...) {
