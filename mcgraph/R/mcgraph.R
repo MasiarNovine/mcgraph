@@ -1159,7 +1159,7 @@ mcg.layout.grid <- function(A, noise=FALSE, layout_matrix=NULL) {
 
 # MN Included C++ implementation
 # Wrapper for Fruchterman & Reingold
-mcg.layout.frg <- function(A, iter=500, W=10, L=10, temp_prop=0.2, force_prop=1.5, quench_prop=0.9, simmering_prop=0.05, seed=1234) {
+mcg.layout.frg <- function(A, iter=500, W=10, L=10, temp_prop=0.1, force_prop=1, quench_prop=0.95, simmering_prop=0.05, seed=12345) {
     if (!is.null(seed)) {
         set.seed(seed)
     }

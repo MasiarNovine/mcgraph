@@ -3,7 +3,7 @@
 
  //[[Rcpp::export]]
 void frgCpp(arma::mat &P, const arma::mat &A, arma::uword iter = 500, double W = 10.0, double L = 10.0,
-            double temp_prop = 0.1, double force_prop = 1, double quench_prop = 0.9, double simmering_prop = 0.05) {
+            double temp_prop = 0.1, double force_prop = 0.5, double quench_prop = 0.9, double simmering_prop = 0.05) {
     // shrink initial values
     P * 1e-6;
     double area, k, t, t_init, d, delta_x, delta_y, fr, fa, d_disp, width_side, length_side;

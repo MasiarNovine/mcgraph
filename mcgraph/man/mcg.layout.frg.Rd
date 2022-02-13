@@ -9,11 +9,11 @@ mcg.layout.frg(
   iter = 500,
   W = 10,
   L = 10,
-  temp_prop = 0.2,
-  force_prop = 1.5,
-  quench_prop = 0.9,
+  temp_prop = 0.1,
+  force_prop = 1,
+  quench_prop = 0.95,
   simmering_prop = 0.05,
-  seed = 1234
+  seed = 12345
 )
 }
 \arguments{

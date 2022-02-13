@@ -465,8 +465,7 @@ Let's apply those methods on a simple random graph where we now the structure:
 par(mfrow=c(2,1), mai=rep(0.1,4))
 set.seed(123)
 ang=mcg.u2d(mcg.angie(nodes=10,edges=16),input=c("B1","F1"))
-lay=mcg.layout.frg(ang, iter=500, L=5, W=5, temp_prop=0.2, quench_prop=0.9, force_prop=1)
-plot(ang,vertex.size=2)
+plot(ang,vertex.size=2.5)
 ang
 data=mcg.graph2data(ang,n=100,iter=10,noise=0.5)
 mcg.corrplot(cor(t(data)),text.lower=TRUE,cex.coeff=0.8)
