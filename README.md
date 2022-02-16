@@ -47,7 +47,7 @@ Install the package by
 R CMD INSTALL mcgraph_0.6.1.tar.gz
 ```
 
-### Build vignette (not mandatory)
+### Build vignette
 
 By the above step, the package is workable, but the vignette might be not up-to-data.
 To update the vignette, you need the R package `knitr` and the `pandoc` tool.
