@@ -1071,8 +1071,10 @@ mcg.layout.grid <- function(A, noise=FALSE, layout_matrix=NULL) {
         colnames(xy) <- c("x", "y")
         rownames(xy) <- var_names
         for (i in seq_along(var_names)) {
-            # To get the right order for x, y and variables
-            xy[i, 2:1] <- c(nrow(layout_matrix), ncol(layout_matrix)) - which(layout_matrix == var_names[i], arr.ind=TRUE, useNames=FALSE)
+            # To get the right order for x, y variables
+            xy[i, 2:1] <- which(layout_matrix == var_names[i], arr.ind=TRUE, useNames=FALSE)
+            # Fixed wrong horizontal ordering
+            xy[i, 2] <- c(nrow(layout_matrix)) - xy[i, 2]
         }
     }
     return(xy)

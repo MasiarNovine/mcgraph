@@ -1,7 +1,7 @@
 ChangeLog
 ==========
 
-## Version 0.3 
+## Version 0.3
 
 
 - 2019-11-19 started
@@ -17,9 +17,9 @@ ChangeLog
 
 - 2020-10-30
 - fixing negative correlations now of same strength
-- standalone command line script graph2data.R which can be used as well 
+- standalone command line script graph2data.R which can be used as well
   independently from the package
-  
+
 
 ## Version 0.4.3
 
@@ -31,7 +31,7 @@ ChangeLog
 - fix for mcg.cluster and mcg.angie for too many edges
 - coloring fix for isolated nodes
 - improved layout for sam and mds by introducing invisible edges between components
- 
+
 
 ## Version 0.5
 
@@ -41,3 +41,13 @@ ChangeLog
 - 2021-08-08 fixing negative plot arrows
 - 2021-08-08 adding Cpp version of graph2data
 - 2021-10-30 adding mcg.timeit and mcg.impute method
+
+## Version 0.6
+
+- 2022-02-11 moved to github repo
+- 2022-02-11 changed node color in plot.mcgraph to 'orange'
+
+## Version 0.6.1
+
+- 2022-02-13 changed default values for mcg.layout.frg
+- 2022-02-16 fix issue in mcg.layout.grid, correct layout order of variables from left to right

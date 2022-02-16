@@ -6,7 +6,7 @@ csl: nature-biotechnology.csl
 shorttitle: "mcgraph intro"
 author:
 - Detlef Groth
-date: "13. Februar 2022"
+date: "16. Februar 2022"
 abstract: >
     The package *mcgraph* can be used to create different types of directed
     and undirected graphs and data for those graphs where the correlations between
@@ -1079,7 +1079,7 @@ mcg.timeit(expression(mcg.lvs(swiss, rs=0.1, output='mcgraph')))
 ```
 
 ```
-## [1] 0.0006279945 0.0006363392 0.0003564358 0.0002579689 0.0003035069
+## [1] 0.0005939007 0.0002970695 0.0002624989 0.0004076958 0.0003147125
 ```
 
 ```r
@@ -1087,7 +1087,7 @@ mean(mcg.timeit(expression(mcg.lvs(swiss, rs=0.1, output='mcgraph'))))
 ```
 
 ```
-## [1] 0.0004058361
+## [1] 0.0002663612
 ```
 
 ```r
@@ -1095,7 +1095,7 @@ mean(mcg.timeit(expression(mcg.rpart(swiss, rs=0.1))))
 ```
 
 ```
-## [1] 0.04993715
+## [1] 0.05020437
 ```
 
 ```r
@@ -1103,7 +1103,7 @@ mean(mcg.timeit(expression(mcg.lvs(swiss, rs=0.1, output='mcgraph',code="R"))))
 ```
 
 ```
-## [1] 0.02909403
+## [1] 0.02701535
 ```
 
 ```r
@@ -1134,28 +1134,28 @@ The following functions are available in the *mcgraph* package:
     * *mcg.lattice* create a grid like graph, optionally with some centralizing edges pointing towards the graph center
     * *mcg.hubs* create one or more graph components with a central hub node and nodes directly attached to this hub
     * *mcg.new* create graph based on a given adjacency matrix
-1. functions to generate random graphs
+2. functions to generate random graphs
     * *mcg.angie* create random graph with all nodes in one component
     * *mcg.barabasi* create random graph following the  Barabasi-Albert model
     * *mcg.random* create random graph were all edges have equal probabilities to be generated
     * *mcg.cluster* create graph with several components, where nodes of each component are densely connected to each other
-1. functions to create directed from undirected graphs and vice versa
+3. functions to create directed from undirected graphs and vice versa
     * *mcg.u2d* convert undirected into directed graph using defined or random input nodes
     * *mcg.d2u* convert directed into undirected graph where any directed edge becomes an undirected one
-1. function to generate data for graphs
+4. function to generate data for graphs
     * *mcg.graph2data* create data for graphs
-1. S3 class methods to analyze and visualize *mcgraph* objects
+5. S3 class methods to analyze and visualize *mcgraph* objects
     * *plot*    plot graphs
     * *degree*  get degree centralities for graph nodes
     * *density* determine ratio of edges to all possible edges
     * *summary* summarize basic graph properties
     * *as.matrix* extract the adjacency matrix of a *mcgraph* object  useful for use the graph with other R packages
-1. network construction functions
+6. network construction functions
     * *mcg.ct* - creates mcgraphs from correlation matrices with a given threshold of R-square
     * *mcg.lvs* - creates mcgraphs using greedy selection of linear model variables
     * *mcg.glmnet* - create mcgraphs using Ridge, elastic net  or Lasso regression
     * *mcg.rpart* - create mcgraphs using rpart regression trees
-1. general purpose functions
+7. general purpose functions
     * *is.mcgraph* checks if a given object is a *mcgraph*
     * *mcg.autonames* create names for nodes automatically
     * *mcg.corrplot* create a simple correlation plot of pairwise correlation

@@ -5,7 +5,7 @@ bfsCpp <- function(S, G) {
     invisible(.Call(`_mcgraph_bfsCpp`, S, G))
 }
 
-frgCpp <- function(P, A, iter = 500L, W = 10.0, L = 10.0, temp_prop = 0.1, force_prop = .5, quench_prop = 0.9, simmering_prop = 0.05) {
+frgCpp <- function(P, A, iter = 500L, W = 10.0, L = 10.0, temp_prop = 0.1, force_prop = 0.5, quench_prop = 0.9, simmering_prop = 0.05) {
     invisible(.Call(`_mcgraph_frgCpp`, P, A, iter, W, L, temp_prop, force_prop, quench_prop, simmering_prop))
 }
 

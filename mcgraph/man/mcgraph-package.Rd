@@ -17,7 +17,7 @@ Otherwise refer to the vignettes to see how to format the documentation.
 
 Authors:
 \itemize{
-  \item Masiar Novine \email{novinefarahb@uni-potsdam.de} (\href{https://orcid.org/0000-0001-9687-8675}{ORCID})
+  \item Masiar Novine \email{masiar.novine@gmail.com} (\href{https://orcid.org/0000-0001-9687-8675}{ORCID})
 }
 
 }

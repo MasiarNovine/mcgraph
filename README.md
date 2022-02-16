@@ -4,10 +4,10 @@ Analysis of synthetic networks based on Monte Carlo simulations
 
 ## Common installation
 
-Download the current tarball `mcgraph_0.6.0.tar.gz` containing the compiled mcgraph package. Move to the directory, where you stored the file and do
+Download the current tarball `mcgraph_0.6.1.tar.gz` containing the compiled mcgraph package. Move to the directory, where you stored the file and do
 
 ```
-R CMD INSTALL mcgraph_0.6.0.tar.gz
+R CMD INSTALL mcgraph_0.6.1.tar.gz
 ```
 
 The package should now be available after opening R and running
@@ -35,16 +35,16 @@ Afterwards do
 R CMD build --no-build-vignettes mcgraph
 ```
 
-You can check the resulting `mcgraph_0.6.0.tar.gz` file by
+You can check the resulting `mcgraph_0.6.1.tar.gz` file by
 
 ```
-R CMD check --cran mcgraph_0.6.0.tar.gz
+R CMD check --cran mcgraph_0.6.1.tar.gz
 ```
 
 Install the package by
 
 ```
-R CMD INSTALL mcgraph_0.6.0.tar.gz
+R CMD INSTALL mcgraph_0.6.1.tar.gz
 ```
 
 ### Build vignette (not mandatory)
