@@ -4,7 +4,13 @@ Analysis of synthetic networks based on Monte Carlo simulations
 
 ## Common installation
 
-Download the current tarball `mcgraph_0.6.1.tar.gz` containing the compiled mcgraph package. Move to the directory, where you stored the file and do
+Download the current tarball `mcgraph_0.6.1.tar.gz` containing the compiled mcgraph package, either by right clickling and saving to your or by
+
+```
+curl -L https://github.com/MasiarNovine/mcgraph/releases/download/v0.6.1/mcgraph_0.6.1.tar.gz mcgraph_0.6.1.tar.gz
+```
+
+Move to the directory, where you stored the file and do
 
 ```
 R CMD INSTALL mcgraph_0.6.1.tar.gz
