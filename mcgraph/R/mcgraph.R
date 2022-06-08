@@ -2206,35 +2206,52 @@ mcg.random = function (nodes=26,edges=50) {
 #'
 #' @description `mcg.barabasi` simplified mode to create a graph based on the Barabasi-Allbert algorithm
 #'
-#' @details This function create a random graph whith a given number of nodes.
-#' Nodes are added subsequently connected by  defined number of edges to nodes added before in the graph.
+#' @details The Barabási-Albert model makes two basic asusumptions regarding networks to model structural properties 
+#' observed in real world networks: 
+#' (1) Growth: Networks are not fixed in size, but grow constantly.
+#' (2) Prefential attachement: New incoming nodes prefer to attach to higher degree nodes of the present network.
+#' Additionally, each node of the network must have at least one link and each new node links to another node 
+#' based on the following probability:
+#' 
+#' \deqn{P(k_i) = \frac{k_i}{\sum_{j}{k_j}}}
+#' 
+#' where eqn{k} denotes the node degree.
+#' The present implementation allows for specifying the number of starting nodes and number of newly build 
+#' connections. The function does not consider loops and multi-edges, because their influence on the network structure 
+#' becomes neglectible for larger networks.
 #' @param nodes Number of nodes in the graph. Default: 26
-#' @param m Number of edges to connect each added node to the graph. Default: 1
+#' @param m Number of edges to connect each added node to the graph. Default: 2
 #' @return Graph of class mcgraph with adjacency matrix for an undirected graph.
 #' @author Detlef Groth <dgroth@uni-potsdam.de>
 #' @references Barabasi, A.-L. and Albert R. 1999. Emergence of scaling in random networks _Science_, 286 509-512
 #' @references Csardi G, Nepusz T: The igraph software package for complex network research, InterJournal, Complex Systems 1695. 2006. http://igraph.org
 #' @examples
-#' bara=mcg.barabasi(nodes=20, m=1)
+#' bara=mcg.barabasi(nodes=20, m=2)
 #' plot(bara,vertex.color=rainbow(20))
 #' @export
 
-mcg.barabasi = function (nodes=26, m=1) {
-    # m number of edges to add at each node addition
-    # second node can only have on edge
-    mt=matrix(0,nrow=nodes,ncol=nodes)
+mcg.barabasi = function (nodes=26, m=2) {
+    mt=matrix(0, nrow=nodes, ncol=nodes)
     rownames(mt)=colnames(mt)=mcg.autonames(LETTERS, nodes)
-    # MN Not working for higer number of nodes
-    #mt['B1','A1']=1
-    mt[2, 1]=1
-    for (n in 3:ncol(mt)) {
-        if (m==n) {
-            sel=n-1
-        } else {
-            sel=m
-        }
-        idx=sample(1:(n-1),sel)
-        mt[n,idx]=1
+    # We neglect loops and multi-edges, so for m=1,
+    # we still start with two nodes and connect them
+    if (m == 1) nds <- c(1, 2) else nds <- seq(1, length.out=m)
+    # Connect each starting node
+    mt[nds, nds] <- 1
+    # No loops
+    diag(mt) <- 0
+    # Start from node m + 1
+    for (i in (length(nds) + 1):ncol(mt)) {
+        # 'lnk' is the number of links required in each step
+        if (m==i) lnk <- i-1 else lnk <- m
+        # MN: Included 'prefential attachement': Nodes attach to nodes, which have higher degrees
+        # Probability for linking of nodes: PI(k_i) = k_i / sum(k_j) 
+        # 'growth' is modeled by just taking the subset of nodes already included
+        deg <- (colSums(t(mt)) + colSums(mt))[1:(i - 1)]
+        # Probabilities are given as a fraction of current node degree and total degrees
+        prob <- deg / sum(deg)
+        idx <- sample(x=1:(i - 1), size=lnk, prob=prob)
+        mt[i, idx] <- 1
     }
     mt[upper.tri(mt)]  <- t(mt)[upper.tri(mt)]
     class(mt)="mcgraph"
