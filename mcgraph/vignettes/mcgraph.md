@@ -6,7 +6,7 @@ csl: nature-biotechnology.csl
 shorttitle: "mcgraph intro"
 author:
 - Detlef Groth
-date: "16. Februar 2022"
+date: "08. Juni 2022"
 abstract: >
     The package *mcgraph* can be used to create different types of directed
     and undirected graphs and data for those graphs where the correlations between
@@ -77,15 +77,15 @@ library(mcgraph)
 ```
 
 ```
-## Loading required package: MASS
+## Lade nötiges Paket: MASS
 ```
 
 ```
-## Loading required package: rpart
+## Lade nötiges Paket: rpart
 ```
 
 ```
-## Loading required package: Rcpp
+## Lade nötiges Paket: Rcpp
 ```
 
 ```r
@@ -331,7 +331,7 @@ par(mfrow=c(2,2),mai=c(0.1,0.1,0.1,0.1))
 ang=mcg.angie(nodes=12,edges=18)
 and=mcg.u2d(ang,input=1)
 plot(and,vertex.size=2,layout="circle")
-bar=mcg.barabasi(nodes=12,m=1)
+bar=mcg.barabasi(nodes=12,m=2)
 bad=mcg.u2d(bar,input=1)
 plot(bad,vertex.size=2,layout="circle")
 ran=mcg.random(nodes=12,edges=18)
@@ -1079,7 +1079,7 @@ mcg.timeit(expression(mcg.lvs(swiss, rs=0.1, output='mcgraph')))
 ```
 
 ```
-## [1] 0.0005939007 0.0002970695 0.0002624989 0.0004076958 0.0003147125
+## [1] 0.0006010532 0.0002720356 0.0002620220 0.0002784729 0.0002498627
 ```
 
 ```r
@@ -1087,7 +1087,7 @@ mean(mcg.timeit(expression(mcg.lvs(swiss, rs=0.1, output='mcgraph'))))
 ```
 
 ```
-## [1] 0.0002663612
+## [1] 0.0002707005
 ```
 
 ```r
@@ -1095,7 +1095,7 @@ mean(mcg.timeit(expression(mcg.rpart(swiss, rs=0.1))))
 ```
 
 ```
-## [1] 0.05020437
+## [1] 0.04568877
 ```
 
 ```r
@@ -1103,7 +1103,7 @@ mean(mcg.timeit(expression(mcg.lvs(swiss, rs=0.1, output='mcgraph',code="R"))))
 ```
 
 ```
-## [1] 0.02701535
+## [1] 0.02479792
 ```
 
 ```r

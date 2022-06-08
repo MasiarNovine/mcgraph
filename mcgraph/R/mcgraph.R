@@ -690,7 +690,8 @@ plot.mcgraph <- function(x, layout=NULL, noise=FALSE,
         }
         if (vertex.symbol == "circle") {
             # Multiply vertex size by factor to set default 'vertex.size' to 1
-            vertex.size <- vertex.size * 1/20
+            vertex.size <- vertex.size * 1 / 20
+            # TODO: Reycycle number of vertex.color and vertex size
             vertex.color <- rep(vertex.color, nrow(x))
             ins <- which(degree(x, mode="in") != 0 & degree(x, mode="out") == 0)
             vertex.color[ins] <- vertex.in.color
@@ -711,7 +712,8 @@ plot.mcgraph <- function(x, layout=NULL, noise=FALSE,
                 }
             }
             # Symbols with 'inches=FALSE' automatically adapts vertex size when the device window is resized
-            symbols(x=xy[,1], y=xy[,2], bg=vertex.color, fg=vertex.border.color, circles=rep(vertex.size, nrow(xy)), add=TRUE, inches=FALSE)
+            if (length(vertex.size) == nrow(xy)) symbols(x=xy[,1], y=xy[,2], bg=vertex.color, fg=vertex.border.color, circles=vertex.size, add=TRUE, inches=FALSE)
+            else symbols(x=xy[,1], y=xy[,2], bg=vertex.color, fg=vertex.border.color, circles=rep(vertex.size, nrow(xy)), add=TRUE, inches=FALSE)
         # MN Solved: arrow heads for rectangles
         } else if (vertex.symbol == "rectangle") {
             # This is just considered for 'rectangle'
@@ -2231,29 +2233,40 @@ mcg.random = function (nodes=26,edges=50) {
 #' @export
 
 mcg.barabasi = function (nodes=26, m=2) {
-    mt=matrix(0, nrow=nodes, ncol=nodes)
-    rownames(mt)=colnames(mt)=mcg.autonames(LETTERS, nodes)
-    # We neglect loops and multi-edges, so for m=1,
-    # we still start with two nodes and connect them
+    if (nodes < 2 ) {
+        stop("'nodes' must be at least 2")
+    }
+    if (m < 1) {
+        stop("'m' must be at least 1")
+    }
+    if (m > nodes) {
+        stop("'m' cannot be larger than 'nodes'")
+    }
+    mt <- matrix(0, nrow=nodes, ncol=nodes)
+    mt <- mcg.new(mt)
+    # We neglect loops and multi-edges, so for m=1, we still start with two nodes and connect them
+    # In the original model, m_0 is the number of initial nodes. 
     if (m == 1) nds <- c(1, 2) else nds <- seq(1, length.out=m)
     # Connect each starting node
     mt[nds, nds] <- 1
     # No loops
     diag(mt) <- 0
+    # Base case, just return the adjacency matrix
+    if (m == nodes) return(mt)
     # Start from node m + 1
-    for (i in (length(nds) + 1):ncol(mt)) {
+    for (i in (m + 1):ncol(mt)) {
         # 'lnk' is the number of links required in each step
-        if (m==i) lnk <- i-1 else lnk <- m
+        #if (m == i) lnk <- i - 1 else lnk <- m
         # MN: Included 'prefential attachement': Nodes attach to nodes, which have higher degrees
         # Probability for linking of nodes: PI(k_i) = k_i / sum(k_j) 
         # 'growth' is modeled by just taking the subset of nodes already included
-        deg <- (colSums(t(mt)) + colSums(mt))[1:(i - 1)]
+        deg <- degree(mt)[1:(i - 1)]
         # Probabilities are given as a fraction of current node degree and total degrees
         prob <- deg / sum(deg)
-        idx <- sample(x=1:(i - 1), size=lnk, prob=prob)
-        mt[i, idx] <- 1
+        idx <- sample(x=1:(i - 1), size=m, prob=prob)
+        mt[i, idx] <- mt[idx, i] <- 1
     }
-    mt[upper.tri(mt)]  <- t(mt)[upper.tri(mt)]
+    #mt[upper.tri(mt)]  <- t(mt)[upper.tri(mt)]
     class(mt)="mcgraph"
     attr(mt,"type")="barabasi"
     attr(mt,"mode")="undirected"

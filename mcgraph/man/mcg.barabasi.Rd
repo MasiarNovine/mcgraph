@@ -4,12 +4,12 @@
 \alias{mcg.barabasi}
 \title{Creation of scale-free Barabasi-Albert graphs}
 \usage{
-mcg.barabasi(nodes = 26, m = 1)
+mcg.barabasi(nodes = 26, m = 2)
 }
 \arguments{
 \item{nodes}{Number of nodes in the graph. Default: 26}
 
-\item{m}{Number of edges to connect each added node to the graph. Default: 1}
+\item{m}{Number of edges to connect each added node to the graph. Default: 2}
 }
 \value{
 Graph of class mcgraph with adjacency matrix for an undirected graph.
@@ -22,7 +22,7 @@ This function create a random graph whith a given number of nodes.
 Nodes are added subsequently connected by  defined number of edges to nodes added before in the graph.
 }
 \examples{
-bara=mcg.barabasi(nodes=20, m=1)
+bara=mcg.barabasi(nodes=20, m=2)
 plot(bara,vertex.color=rainbow(20))
 }
 \references{
