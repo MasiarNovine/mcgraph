@@ -8,19 +8,19 @@ Several algorithms (e.g. lasso, step-wise linear regression, GLM, a.o.) and eval
 
 Download the current tarball `mcgraph_0.6.1.tar.gz` containing the compiled mcgraph package, either by right click and saving it to your system or by
 
-```
+```bash
 curl -L https://github.com/MasiarNovine/mcgraph/releases/download/v0.6.1/mcgraph_0.6.1.tar.gz mcgraph_0.6.1.tar.gz
 ```
 
 Move to the directory, where you stored the file and do
 
-```
+```bash
 R CMD INSTALL mcgraph_0.6.1.tar.gz
 ```
 
 The package should now be available after opening R and running
 
-```
+```bash
 library(mcgraph)
 ```
 
@@ -32,26 +32,26 @@ Go to the directory where the folder has been saved to.
 
 Open R and load the `roxygen2` package (install the package if necessary) and run
 
-```
+```r
 library(roxygen2)
-roxygenize("mcgraph")	# needed for package building
+roxygenize("mcgraph")   # needed for package building
 ```
 
 Afterwards do
 
-```
+```bash
 R CMD build --no-build-vignettes mcgraph
 ```
 
 You can check the resulting `mcgraph_0.6.1.tar.gz` file by
 
-```
+```bash
 R CMD check --cran mcgraph_0.6.1.tar.gz
 ```
 
 Install the package by
 
-```
+```bash
 R CMD INSTALL mcgraph_0.6.1.tar.gz
 ```
 
@@ -64,13 +64,14 @@ Before building the core source, change into the `vignette` subfolder of the dir
 
 Open R and load the `knitr` package
 
-```
+```r
 library(knitr)
 knit('mcgraph.Rmd')
 ```
+
 Close R and run on the terminal
 
-```
+```bash
 pandoc -i mcgraph.md --citeproc --bibliography bibliography.bib -o mcgraph.pdf
 ```
 
