@@ -1,8 +1,8 @@
 # mcgraph
 
-An R package for the analysis of synthetic large networks based on Monte Carlo resampling. *mcgraph* allows for creation and visualiation of different types of random networks based on a given graph structure and test the ability of algorithms to rediscover the initial graph structure. 
+An R package for the analysis of synthetic large networks based on Monte Carlo resampling. *mcgraph* allows for creation and visualisation of different types of random networks based on a given graph structure and test the ability of algorithms to rediscover the initial graph structure.
 
-Several algorithms (e.g. lasso, step-wise linear regression, GLM, a.o.) and evaluation metrics (e.g. accuracy, sensitivity, MCC, ROC/PROC curves, a.o.) are currently implemented.   
+Several algorithms (e.g. lasso, step-wise linear regression, GLM, a.o.) and evaluation metrics (e.g. accuracy, sensitivity, MCC, ROC/PROC curves, a.o.) are currently implemented.
 
 ## Common installation
 
